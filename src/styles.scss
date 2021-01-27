@@ -1,0 +1,91 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+#chartjs-tooltip.top.left:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 0 8px 8px 8px;
+  top: 0;
+  content:"";
+  display: block;
+  left: 16;
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%);
+}
+
+#chartjs-tooltip.bottom.left:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 8px 8px 0 8px;
+  top: 100%;
+  content:"";
+  display: block;
+  left: 0;
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, 100);
+  transform: translate(-50%, 100);
+}
+
+#chartjs-tooltip.top.center:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 0 8px 8px 8px;
+  top: 0;
+  content:"";
+  display: block;
+  left: 50%;
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%);
+}
+
+#chartjs-tooltip.bottom.center:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 8px 8px 0px 8px;
+  top: 100%;
+  content:"";
+  display: block;
+  left: 45%;
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, 100);
+  transform: translate(-50%, 100);
+  transform: rotate(180)
+}
+
+#chartjs-tooltip.bottom.right:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 8px 8px 0px 8px;
+  top: 100%;
+  content:"";
+  display: block;
+  left: calc(100% - 16px);
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, 100);
+  transform: translate(-50%, 100);
+  transform: rotate(180)
+}
+
+#chartjs-tooltip.top.right:before {
+  border: solid;
+  border-color: #7EB279 transparent;
+  border-width: 0 8px 8px 8px;
+  top: 0;
+  content:"";
+  display: block;
+  left: calc(100% - 8px);
+  position: absolute;
+  z-index: 99;
+  -webkit-transform: translate(-50%, -100%);
+  transform: translate(-50%, -100%);
+}
