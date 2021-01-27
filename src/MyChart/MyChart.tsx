@@ -1,6 +1,9 @@
-import { Line } from "react-chartjs-2";
+import {Line} from "react-chartjs-2";
+import React from "react";
 import { StyledChart } from "./MyChart.style";
 import MyChartLegend from "./MyChartLegend";
+import {ChartData, ChartOptions, ChartTooltipItem, ChartTooltipModel} from "chart.js";
+
 
 const myRedBackground: string = "rgb(255,99,71,0.3)";
 const myRed: string = "rgb(206, 62, 50, 1)";
@@ -10,7 +13,7 @@ const myGreen: string = "rgba(126, 178, 121, 1)";
 const myBlue: string = "rgba(135, 206, 235, 1)";
 const myBlueBackground: string = "rgba(173, 216, 230, 0.3)";
 const myDarkBlue: string = "rgba(70,130,180,1)";
-const myTransparent = "rgba(0,0,0,0)";
+const myTransparent: string = "rgba(0,0,0,0)";
 
 const labels: string[] = [
   "21/01 - 00:00",
@@ -60,9 +63,8 @@ const dataAverageColours: string[] = dataAverage.map((value) =>
   value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myGreen
 );
 
-const data = {
+const data: ChartData = {
   labels: labels,
-  xLabels: labels,
   datasets: [
     {
       label: "Min",
@@ -123,7 +125,7 @@ const data = {
   ]
 };
 
-const options = {
+const options: ChartOptions = {
   responsive: true,
   legend: {
     display: false
@@ -162,7 +164,7 @@ const options = {
     enabled: false,
     mode: "index",
     position: "nearest",
-    custom: function (tooltipModel) {
+    custom: function (tooltipModel: ChartTooltipModel) {
       // Tooltip Element
       let tooltipEl = document.getElementById("chartjs-tooltip");
 
@@ -202,7 +204,7 @@ const options = {
         tooltipEl.classList.add("no-transform");
       }
 
-      function getBody(bodyItem) {
+      function getBody(bodyItem: any) {
         return bodyItem.lines;
       }
 
@@ -214,15 +216,18 @@ const options = {
 
         let innerHtml = "<thead>";
 
-        titleLines.forEach(function (title) {
+        titleLines.forEach(function (title:string) {
           innerHtml += "<tr><th>" + title + "</th></tr>";
         });
         innerHtml += "</thead><tbody>";
 
-        bodyLines.forEach(function (body, i) {
+        bodyLines.forEach(function (body:any, i:number) {
           if (body.length) {
             let colors = tooltipModel.labelColors[i];
+
+            // @ts-ignore
             let style = "background:" + colors.backgroundColor;
+            // @ts-ignore
             style += "; border-color:" + colors.borderColor;
             style += "; border-width: 2px";
             style += "; content: ' '; display: inline-block; margin-right: 2px";
@@ -241,16 +246,20 @@ const options = {
           "</td></tr></tfoot>";
 
         let tableRoot = tooltipEl.querySelector("table");
-        tableRoot.innerHTML = innerHtml;
+
+        if(tableRoot){
+          tableRoot.innerHTML = innerHtml;
+        }
+
       }
 
-      // `this` will be the overall tooltip
-      // let position = this._chart.canvas.getBoundingClientRect();
-
-      // Tooltip height and width
+        // Tooltip height and width
       const { height, width } = tooltipEl.getBoundingClientRect();
       // Chart canvas positions
+
+      // @ts-ignore
       const positionY = this._chart.canvas.offsetTop;
+      // @ts-ignore
       const positionX = this._chart.canvas.offsetLeft;
 
       // Carets
@@ -303,29 +312,46 @@ const options = {
       tooltipEl.style.border = "solid 2px #7EB279";
     },
     callbacks: {
-      title: function (tooltipItem, data) {
-        let title = data.labels[tooltipItem[0].index];
-        return title;
+      title: function (tooltipItem: ChartTooltipItem[], data) {
+        let thisIndex = tooltipItem[0].index;
+        if(data && data.labels && data.labels.length && thisIndex && thisIndex >= 0) {
+            let newTitle = data.labels[thisIndex];
+            if(typeof newTitle === "string"){
+              return newTitle;
+            } else {
+              return "";
+            }
+          } else {
+            return ""
+          }
       },
-      label: function (tooltipItem, data) {
-        let label =
-          data.datasets[tooltipItem.datasetIndex].label === "TempMax"
-            ? "Maximum temperature"
-            : data.datasets[tooltipItem.datasetIndex].label === "TempMin"
-            ? "Minimum temperature"
-            : data.datasets[tooltipItem.datasetIndex].label === "TempAverage"
-            ? "Average temperature"
-            : null;
+      label: function (tooltipItem: ChartTooltipItem, data) {
+        let thisIndex = tooltipItem?.datasetIndex
+        if(data && data.datasets && thisIndex && thisIndex >= 0 ){
+          let label =
+              data.datasets[thisIndex].label === "TempMax"
+                  ? "Maximum temperature"
+                  : data.datasets[thisIndex].label === "TempMin"
+                  ? "Minimum temperature"
+                  : data.datasets[thisIndex].label === "TempAverage"
+                      ? "Average temperature"
+                      : null;
 
-        if (label) {
-          label += " : ";
-          label += Math.round(tooltipItem.yLabel * 100) / 100;
-          label += " °C";
+          if (label && tooltipItem.yLabel && typeof tooltipItem.yLabel === "number") {
+            label += " : ";
+            label += Math.round(tooltipItem.yLabel * 100) / 100;
+            label += " °C";
+            return label
+          } else {
+            return ""
+          }
+        }
+         else {
+          return ""
         }
 
-        return label;
       },
-      footer: function (tooltipItem, data) {
+      footer: function () {
         let footer = " Le Havre Port ➔ New York Port";
         return footer;
       }
@@ -349,7 +375,7 @@ const MyChart = () => {
     <StyledChart>
       <MyChartLegend />
       <div>
-        <Line data={data} options={options} height={100 - 20} />
+        <Line data={data} options={options} height={100 - 20}  />
       </div>
     </StyledChart>
   );
