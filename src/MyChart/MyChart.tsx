@@ -6,7 +6,7 @@ import {ChartData, ChartOptions, ChartTooltipItem, ChartTooltipModel} from "char
 
 
 const myRedBackground: string = "rgb(255,99,71,0.3)";
-const myRed: string = "rgb(206, 62, 50, 1)";
+const myRed: string = "rgba(206, 62, 50, 1)";
 
 const myOrange: string = "rgb(255, 125, 100)";
 const myGreen: string = "rgba(126, 178, 121, 1)";
