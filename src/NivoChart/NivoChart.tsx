@@ -1,31 +1,22 @@
 import { ResponsiveLine } from '@nivo/line'
 import {getData} from "./data"
 import {StyledChart} from "./NivoChart.style";
-import React, {ChangeEvent, ChangeEventHandler, FormEvent} from "react";
+import React, {ChangeEvent, ChangeEventHandler, Dispatch, FormEvent, SetStateAction} from "react";
 import NivoTooltip from "./NivoTooltip";
 
-const MyResponsiveLine: React.FC = () => {
-    const [number, setNumber] = React.useState(15)
+
+interface Props {
+    number: number,
+    setNumber: Dispatch<SetStateAction<number>>,
+}
+
+const MyResponsiveLine: React.FC<Props> = ({number, setNumber}) => {
+
 
     let data = getData(number)
 
-    const handleNumber = () => {
-        if(event && event.target){
-            console.log(event.target)
-        }
-
-    }
-
-
     return (
         <StyledChart>
-            <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-                event.preventDefault();
-                getData(number);
-            }}>
-                <input type="number" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumber(parseInt(event.target.value))}
-                       value={number} />
-            </form>
             <div id='nivoTemp'>
             <ResponsiveLine
             data={data}

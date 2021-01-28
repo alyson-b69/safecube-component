@@ -32,8 +32,8 @@ export const StyledTooltip = styled.div<{x:number, y:number, width:number|null, 
   border-radius: 5px;
   font-size: 12px;
   padding: 3px;
-  left: ${props => props.x < 50 ? '10px' : props.width !== null && props.x > (props.width - 110) ? '-220px' : '-100px'};
-  top: ${props => props.x < 50 || props.width !== null && props.x > (props.width - 110)  ? '-45px' : '10px'};
+  left: ${props => props.x < 50 ? '10px' : props.width !== null && props.x > (props.width - 150) ? '-220px' : '-100px'};
+  top: ${props => props.x < 50 || props.width !== null && props.x > (props.width - 150)  ? '-45px' : '10px'};
   
   & h4{
     margin: 3px 0;
