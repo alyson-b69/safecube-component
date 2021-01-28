@@ -18,6 +18,10 @@ export const StyledChart = styled.div`
     height:300px;
     min-height:300px;
   }
+  
+  & form{
+    margin-bottom: 15px;
+  }
 `
 
 export const StyledTooltip = styled.div<{x:number, y:number, width:number|null, height:number|null}>`

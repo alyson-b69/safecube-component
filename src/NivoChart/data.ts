@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const getRandomArbitrary = (min: number, max: number) => {
     return Math.random() * (max - min) + min;
 };
@@ -37,16 +39,19 @@ export const getData = (nbValues: number) => {
         },
     ]
 
+
+
     for(let i = nbValues; i >= 0; i--){
+        let time = moment().subtract(i, 'days').format("DD/MM - hh:mm")
         let minValue = getRandomArbitrary(-20, 20)
         let maxValue = getRandomArbitrary(20, 40)
         let averageValue = (minValue + maxValue) /2
 
-        const minTempData = {x: i, y: minValue}
-        const averageTempData = {x: i, y: averageValue}
-        const maxTempData = {x: i, y: maxValue}
-        const minData = {x: i, y: -2}
-        const maxData = {x: i, y: 30}
+        const minTempData = {x: time, y: minValue}
+        const averageTempData = {x: time, y: averageValue}
+        const maxTempData = {x: time, y: maxValue}
+        const minData = {x: time, y: -2}
+        const maxData = {x: time, y: 30}
 
         result[0].data.push(minTempData)
         result[1].data.push(averageTempData)
