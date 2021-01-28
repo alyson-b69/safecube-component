@@ -1,22 +1,43 @@
 import { ResponsiveLine } from '@nivo/line'
-import {data} from "./data"
+import {getData} from "./data"
 import {StyledChart} from "./NivoChart.style";
-import React from "react";
+import React, {ChangeEvent, ChangeEventHandler, FormEvent} from "react";
+import NivoTooltip from "./NivoTooltip";
 
+const MyResponsiveLine: React.FC = () => {
+    const [number, setNumber] = React.useState(10)
 
+    let data = getData(number)
 
-const MyResponsiveLine = () => {
+    const handleNumber = () => {
+        if(event && event.target){
+            console.log(event.target)
+        }
+
+    }
+
 
     return (
         <StyledChart>
-            <div>
+            <div id='nivoTemp'>
+                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+                    event.preventDefault();
+                    getData(number);
+                }}>
+                    <input type="number" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNumber(parseInt(event.target.value))}
+                                 value={number} />
+                </form>
             <ResponsiveLine
             data={data}
+            curve={'monotoneX'}
             margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: -30, max: 45, stacked: false, reverse: false }}
             yFormat=" >-.2f"
-            enableSlices={'x'}
+            tooltip={(input) => {
+                return (
+                    <NivoTooltip input={input} data={data} />
+                )}}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -31,7 +52,7 @@ const MyResponsiveLine = () => {
                 tickPadding: 5,
                 tickRotation: 0,
             }}
-            pointSize={10}
+            pointSize={8}
             pointBorderWidth={1}
             colors={['rgba(135, 206, 235, 1)','rgba(126, 178, 121, 1)','rgb(255, 125, 100)', 'rgba(206, 62, 50, 1)', 'rgba(70,130,180,1)']}
             pointBorderColor={{ from: 'serieColor' }}

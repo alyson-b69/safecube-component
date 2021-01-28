@@ -1,192 +1,59 @@
-export const data = [
-    {
-        "id": "min-temp",
-        "color": "hsl(116, 70%, 50%)",
-        "data": [
-            {
-                "x": "21/01 - 00:00",
-                "y": 4
-            },
-            {
-                "x": "21/01 - 06:00",
-                "y": -3
-            },
-            {
-                "x": "21/01 - 12:00",
-                "y": 2
-            },
-            {
-                "x": "21/01 - 18:00",
-                "y": 3
-            },
-            {
-                "x": "22/01 - 00:00",
-                "y": -10
-            },
-            {
-                "x": "22/01 - 06:00",
-                "y": -1
-            },
-            {
-                "x": "22/01 - 12:00",
-                "y": 2
-            },
-            {
-                "x": "22/01 - 18:00",
-                "y": 5
-            },
-            {
-                "x": "23/01 - 00:00",
-                "y": 10
-            },
-            {
-                "x": "23/01 - 06:00",
-                "y": 20
-            },
-            {
-                "x": "23/01 - 12:00",
-                "y": 25
-            },
-            {
-                "x": "23/01 - 18:00",
-                "y": 21
-            }
-        ]
-    },
-    {
-        "id": "average-temp",
-        "color": "hsl(153, 70%, 50%)",
-        "data": [
-            {
-                "x": "21/01 - 00:00",
-                "y": 9
-            },
-            {
-                "x": "21/01 - 06:00",
-                "y": 2
-            },
-            {
-                "x": "21/01 - 12:00",
-                "y": 7
-            },
-            {
-                "x": "21/01 - 18:00",
-                "y": 8
-            },
-            {
-                "x": "22/01 - 00:00",
-                "y": -5
-            },
-            {
-                "x": "22/01 - 06:00",
-                "y": 4
-            },
-            {
-                "x": "22/01 - 12:00",
-                "y": 7
-            },
-            {
-                "x": "22/01 - 18:00",
-                "y": 10
-            },
-            {
-                "x": "23/01 - 00:00",
-                "y": 15
-            },
-            {
-                "x": "23/01 - 06:00",
-                "y": 25
-            },
-            {
-                "x": "23/01 - 12:00",
-                "y": 30
-            },
-            {
-                "x": "23/01 - 18:00",
-                "y": 26
-            }
-        ]
-    },
-    {
-        "id": "max-temp",
-        "color": "hsl(358, 70%, 50%)",
-        "data": [
-            {
-                "x": "21/01 - 00:00",
-                "y": 14
-            },
-            {
-                "x": "21/01 - 06:00",
-                "y": 7
-            },
-            {
-                "x": "21/01 - 12:00",
-                "y": 12
-            },
-            {
-                "x": "21/01 - 18:00",
-                "y": 13
-            },
-            {
-                "x": "22/01 - 00:00",
-                "y": 0
-            },
-            {
-                "x": "22/01 - 06:00",
-                "y": 9
-            },
-            {
-                "x": "22/01 - 12:00",
-                "y": 12
-            },
-            {
-                "x": "22/01 - 18:00",
-                "y": 15
-            },
-            {
-                "x": "23/01 - 00:00",
-                "y": 20
-            },
-            {
-                "x": "23/01 - 06:00",
-                "y": 30
-            },
-            {
-                "x": "23/01 - 12:00",
-                "y": 35
-            },
-            {
-                "x": "23/01 - 18:00",
-                "y": 31
-            }
-        ]
-    },
-    {
-        "id": "max",
-        "color": "hsl(5, 61%, 50%)",
-        "data": [
-            {
-                "x": "21/01 - 00:00",
-                "y": 30
-            },
-            {
-                "x": "23/01 - 18:00",
-                "y": 30
-            }
-        ]
-    },
-    {
-        "id": "min",
-        "color": "hsl(87, 70%, 50%)",
-        "data": [
-            {
-                "x": "21/01 - 00:00",
-                "y": -3
-            },
-            {
-                "x": "23/01 - 18:00",
-                "y": -3
-            }
-        ]
+const getRandomArbitrary = (min: number, max: number) => {
+    return Math.random() * (max - min) + min;
+};
+
+export const getData = (nbValues: number) => {
+
+    interface DataItem {
+        x: string | number;
+        y: number;
     }
-]
+
+    interface Result {
+        id: string;
+        data: DataItem[];
+    }[]
+
+    let result: Result[] = [
+        {
+            id : "min-temp",
+            data: [],
+        },
+        {
+            id : "average-temp",
+            data: [],
+        },
+        {
+            id : "max-temp",
+            data: [],
+        },
+        {
+            id : 'max',
+            data: [],
+        },
+        {
+            id : 'min',
+            data: [],
+        },
+    ]
+
+    for(let i = nbValues; i >= 0; i--){
+        let minValue = getRandomArbitrary(-20, 20)
+        let maxValue = getRandomArbitrary(20, 40)
+        let averageValue = (minValue + maxValue) /2
+
+        const minTempData = {x: i, y: minValue}
+        const averageTempData = {x: i, y: averageValue}
+        const maxTempData = {x: i, y: maxValue}
+        const minData = {x: i, y: -2}
+        const maxData = {x: i, y: 30}
+
+        result[0].data.push(minTempData)
+        result[1].data.push(averageTempData)
+        result[2].data.push(maxTempData)
+        result[3].data.push(maxData)
+        result[4].data.push(minData)
+    }
+
+    return result
+}
