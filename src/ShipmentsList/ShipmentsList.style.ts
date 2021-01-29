@@ -15,8 +15,29 @@ export const StyledTable = styled.table`
   & thead {
     border-bottom: solid 1px #888F9930;
     border-radius: 5px 5px 0 0;
+    display: inline-block;
     & tr{
-      height: 60px
+      height: 60px;
+      
+      & span.mobile-title{
+        display:none;
+      }
+      
+      @media only screen and (max-width: 1000px){
+            
+        & th{
+         display:none;
+        }
+
+        & span.mobile-title{
+          display: block;
+          width: 100%;
+          height: 100%;
+          font-size: 1rem;
+          padding: 22px;
+          font-weight: 700;
+        }
+    }
     }
   }
   
@@ -28,6 +49,7 @@ export const StyledTable = styled.table`
   & thead > tr, tbody > tr {
     padding: 5px;
     width: 100%;
+    margin: 0;
   }
 
   & thead tr th:first-child {
@@ -72,6 +94,7 @@ export const StyledTable = styled.table`
   
   & tbody{
     overflow-y: scroll;
+    overflow-x: hidden;
     display:block;
     height: 50vh;
     border-radius: 0 0 10px 10px;
@@ -89,6 +112,28 @@ export const StyledTable = styled.table`
         background: #ffffff;
         & span {
           background: #7EB279;
+        }
+      }
+    }
+    
+    @media only screen and (max-width: 1000px){
+      display:flex;
+      flex-direction: column;
+      height: auto;
+      text-align: justify;54a1a
+      padding:10px 20px;
+      max-width: 100% ;
+      & td:nth-child(1){
+        width: 100%;
+      }
+      & td:nth-child(2),td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8){
+        width: 100%;
+        &:before{
+          content:attr(data-label) ' : ';
+          text-transform: capitalize;
+          float:left;
+          font-weight: 700;
+          padding-right: 10px;
         }
       }
     }
