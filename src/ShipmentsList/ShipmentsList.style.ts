@@ -4,7 +4,7 @@ import viewMore from '../assets/view-more.svg'
 export const StyledTable = styled.table`
   display:block;
   width: 90%;
-  margin: 0 auto;
+  margin: 10px auto;
   border: none;
   border-collapse: collapse;
   border-radius: 5px;

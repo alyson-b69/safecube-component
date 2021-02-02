@@ -42,7 +42,7 @@ export const getData = (nbValues: number) => {
 
 
     for(let i = nbValues; i >= 0; i--){
-        let time = moment().subtract(i, 'days').format("DD/MM - hh:mm")
+        let time = moment().subtract(i*6, 'hours').format("DD/MM - HH:mm")
         let minValue = getRandomArbitrary(-20, 20)
         let maxValue = getRandomArbitrary(20, 40)
         let averageValue = (minValue + maxValue) /2

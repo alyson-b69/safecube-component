@@ -5,7 +5,7 @@ import MyResponsiveLine from "../NivoChart/NivoChart";
 
 const TemperatureCharts = () => {
 
-    const [number, setNumber] = React.useState(15);
+    const [number, setNumber] = React.useState(16);
 
     return (
         <>

@@ -1,10 +1,10 @@
 import {Line} from "react-chartjs-2";
 import React, {Dispatch,  SetStateAction} from "react";
-import { StyledChart } from "./MyChart.style";
-import MyChartLegend from "./MyChartLegend";
+import { StyledChart } from "./Chartv2.style";
+import Chartv2Legend from "./Chartv2Legend";
 import {ChartData, ChartOptions, ChartTooltipItem, ChartTooltipModel} from "chart.js";
 import moment from "moment";
-import {getData} from "../NivoChart/data";
+
 
 
 const myRedBackground: string = "rgb(255,99,71,0.3)";
@@ -17,24 +17,20 @@ const myBlueBackground: string = "rgba(173, 216, 230, 0.3)";
 const myDarkBlue: string = "rgba(70,130,180,1)";
 const myTransparent: string = "rgba(0,0,0,0)";
 
-interface Props {
-  number: number,
-  setNumber: Dispatch<SetStateAction<number>>,
-}
+
+const Chartv2: React.FC = () => {
 
 
-
-const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
-
+  const number = 70
   const labels: string[] = []
 
   for(let i = number; i >= 0; i--){
-    let time = moment().subtract(i*6, 'hours').format("DD/MM - HH:mm");
+    let time = moment("2020-03-14T18:00").subtract(i*6, 'hours').format("DD/MM/YY - HH:mm");
     labels.push(time)
   }
 
-  const maxTemp: number = 31;
-  const minTemp: number = 0;
+  const maxTemp: number = 5;
+  const minTemp: number = -1;
 
   const getRandomArbitrary = (min: number, max: number) => {
     return Math.random() * (max - min) + min;
@@ -43,21 +39,10 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
   const minn: number[] = labels.map(() => minTemp);
   const maxx: number[] = labels.map(() => maxTemp);
 
-  const dataMax: number[] = labels.map(() => getRandomArbitrary(20, 45));
-  const dataMin: number[] = labels.map(() => getRandomArbitrary(-20, 20));
-  const dataAverage: number[] = labels.map(
-      (item, index) => (dataMax[index] + dataMin[index]) / 2
-  );
+  const dataTemp: number[] = labels.map(() => getRandomArbitrary(2, 3));
 
-  const dataMinColours: string[] = dataMin.map((value) =>
-      value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myBlue
-  );
 
-  const dataMaxColours: string[] = dataMax.map((value) =>
-      value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myOrange
-  );
-
-  const dataAverageColours: string[] = dataAverage.map((value) =>
+  const dataTempColours: string[] = dataTemp.map((value) =>
       value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myGreen
   );
 
@@ -84,39 +69,14 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
         borderColor: myRed,
         borderWidth: 2
       },
-
-      {
-        label: "TempMax",
-        data: dataMax,
-        fill: "-1",
-        pointBorderWidth: 2,
-        pointBackgroundColor: dataMaxColours,
-        pointBorderColor: dataMaxColours,
-        backgroundColor: myRedBackground,
-        borderColor: myOrange,
-        borderWidth: 2,
-        pointHoverRadius: 5
-      },
       {
         label: "TempAverage",
-        data: dataAverage,
+        data: dataTemp,
         fill: false,
         pointBorderWidth: 2,
-        pointBorderColor: dataAverageColours,
-        pointBackgroundColor: dataAverageColours,
+        pointBorderColor: dataTempColours,
+        pointBackgroundColor: dataTempColours,
         borderColor: myGreen,
-        borderWidth: 2,
-        pointHoverRadius: 5
-      },
-      {
-        label: "TempMin",
-        data: dataMin,
-        fill: "-4",
-        pointBorderWidth: 2,
-        pointBackgroundColor: dataMinColours,
-        pointBorderColor: dataMinColours,
-        backgroundColor: myBlueBackground,
-        borderColor: myBlue,
         borderWidth: 2,
         pointHoverRadius: 5
       }
@@ -137,8 +97,7 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
             maxRotation: 30,
             minRotation: 30,
             callback: function (label, index, labels) {
-
-              if(number > 16){
+              if (number > 16) {
                 let remainder = (index % 4) / 100;
 
                 if (remainder === 0) {
@@ -146,8 +105,7 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
                 } else {
                   return "";
                 }
-              }
-              else {
+              } else {
                 return label
               }
             }
@@ -158,8 +116,8 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
         {
           gridLines: { display: true, z: 1 },
           ticks: {
-            suggestedMin: -30,
-            suggestedMax: 50
+            suggestedMin: -5,
+            suggestedMax: 10
           }
         }
       ]
@@ -355,9 +313,26 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
           }
 
         },
-        footer: function () {
-          let footer = " Le Havre Port ➔ New York Port";
-          return footer;
+        footer: function (tooltipItem) {
+            let thisIndex = tooltipItem[0].index
+            let footer = " ";
+            if(thisIndex && thisIndex === 70){
+              footer += "BERGEVIN WAREHOUSE"
+            } else if (thisIndex && thisIndex > 66 ){
+              footer += "Pointe à Pitre ➔ BERGEVIN WAREHOUSE"
+            } else if(thisIndex && thisIndex > 62){
+              footer += "Pointe à Pitre"
+            }else if(thisIndex && thisIndex > 21){
+              footer += "Le Havre port ➔ Pointe à Pitre"
+            } else if(thisIndex && thisIndex > 6){
+              footer += "Le Havre port"
+            } else if(thisIndex && thisIndex > 0){
+              footer += "Gexpa warehouse ➔ Le Havre port"
+            } else {
+              footer += "Gexpa warehouse"
+            }
+            return footer;
+
         }
       },
       backgroundColor: "#ffffff",
@@ -377,7 +352,7 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
 
   return (
     <StyledChart>
-      <MyChartLegend />
+      <Chartv2Legend />
       <div>
         <Line data={data} options={options} height={100 - 20}  />
       </div>
@@ -385,4 +360,4 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
   );
 };
 
-export default MyChart;
+export default Chartv2;
