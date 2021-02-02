@@ -84,7 +84,6 @@ const MyChart: React.FC<Props> = ({number, setNumber, children}) => {
         borderColor: myRed,
         borderWidth: 2
       },
-
       {
         label: "TempMax",
         data: dataMax,

@@ -40,10 +40,20 @@ const Chartv2: React.FC = () => {
   const maxx: number[] = labels.map(() => maxTemp);
 
   const dataTemp: number[] = labels.map(() => getRandomArbitrary(2, 3));
+  const dataMin: number[] = dataTemp.map((item) => item - getRandomArbitrary(1, 2));
+  const dataMax: number[] = dataTemp.map((item, index) => item + item - dataMin[index] );
 
 
   const dataTempColours: string[] = dataTemp.map((value) =>
       value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myGreen
+  );
+
+  const dataMinColours: string[] = dataMin.map((value) =>
+      value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myBlue
+  );
+
+  const dataMaxColours: string[] = dataMax.map((value) =>
+      value < minTemp ? myDarkBlue : value > maxTemp ? myRed : myOrange
   );
 
   const data: ChartData = {
@@ -70,6 +80,18 @@ const Chartv2: React.FC = () => {
         borderWidth: 2
       },
       {
+        label: "TempMax",
+        data: dataMax,
+        fill: "-1",
+        pointBorderWidth: 2,
+        pointBackgroundColor: dataMaxColours,
+        pointBorderColor: dataMaxColours,
+        backgroundColor: myRedBackground,
+        borderColor: myOrange,
+        borderWidth: 2,
+        pointHoverRadius: 5
+      },
+      {
         label: "TempAverage",
         data: dataTemp,
         fill: false,
@@ -77,6 +99,18 @@ const Chartv2: React.FC = () => {
         pointBorderColor: dataTempColours,
         pointBackgroundColor: dataTempColours,
         borderColor: myGreen,
+        borderWidth: 2,
+        pointHoverRadius: 5
+      },
+      {
+        label: "TempMin",
+        data: dataMin,
+        fill: "-4",
+        pointBorderWidth: 2,
+        pointBackgroundColor: dataMinColours,
+        pointBorderColor: dataMinColours,
+        backgroundColor: myBlueBackground,
+        borderColor: myBlue,
         borderWidth: 2,
         pointHoverRadius: 5
       }
@@ -319,11 +353,11 @@ const Chartv2: React.FC = () => {
             if(thisIndex && thisIndex === 70){
               footer += "BERGEVIN WAREHOUSE"
             } else if (thisIndex && thisIndex > 66 ){
-              footer += "Pointe à Pitre ➔ BERGEVIN WAREHOUSE"
+              footer += "Pointe à Pitre Port ➔ BERGEVIN WAREHOUSE"
             } else if(thisIndex && thisIndex > 62){
-              footer += "Pointe à Pitre"
+              footer += "Pointe à Pitre Port"
             }else if(thisIndex && thisIndex > 21){
-              footer += "Le Havre port ➔ Pointe à Pitre"
+              footer += "Le Havre port ➔ Pointe à Pitre Port"
             } else if(thisIndex && thisIndex > 6){
               footer += "Le Havre port"
             } else if(thisIndex && thisIndex > 0){
