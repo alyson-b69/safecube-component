@@ -19,7 +19,7 @@ export const StyledTable = styled.table`
     & tr{
       height: 60px;
       
-      & span.mobile-title{
+      & th.mobile-title{
         display:none;
       }
       
@@ -29,7 +29,7 @@ export const StyledTable = styled.table`
          display:none;
         }
 
-        & span.mobile-title{
+        & th.mobile-title{
           display: block;
           width: 100%;
           height: 100%;

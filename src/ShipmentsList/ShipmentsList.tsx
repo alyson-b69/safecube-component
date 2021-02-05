@@ -14,7 +14,7 @@ const ShipmentsList = () => {
                     <th>Departure place</th>
                     <th>Arrival date</th>
                     <th>Arrival place</th>
-                    <span className='mobile-title'>Shipment history list</span>
+                    <th className='mobile-title'>Shipment history list</th>
                 </tr>
             </thead>
             <tbody>
