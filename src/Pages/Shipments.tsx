@@ -1,4 +1,4 @@
-import ShipmentsList from "../ShipmentsList/ShipmentsList";
+import ShipmentsList from "../Components/ShipmentsList/ShipmentsList";
 
 
 const Shipments = () => {

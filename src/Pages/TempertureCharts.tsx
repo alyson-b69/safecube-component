@@ -1,7 +1,7 @@
 import React from "react";
-import {getData} from "../NivoChart/data";
-import MyChart from "../MyChart/MyChart";
-import MyResponsiveLine from "../NivoChart/NivoChart";
+import {getData} from "../Components/NivoChart/data";
+import MyChart from "../Components/MyChart/MyChart";
+import MyResponsiveLine from "../Components/NivoChart/NivoChart";
 
 const TemperatureCharts = () => {
 

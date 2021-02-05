@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import location from "../assets/location.svg"
+import location from "../../assets/location.svg"
 
 export const StyledChart = styled.div`
   width: 90%;

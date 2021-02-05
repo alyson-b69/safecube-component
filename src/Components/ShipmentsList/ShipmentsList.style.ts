@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import viewMore from '../assets/view-more.svg'
+import viewMore from '../../assets/view-more.svg'
 
 export const StyledTable = styled.table`
   display:block;

@@ -1,5 +1,5 @@
 import React from "react";
-import Chartv2 from "../Chartv2/Chartv2";
+import Chartv2 from "../Components/Chartv2/Chartv2";
 
 
 const ChartV2 = () => {
