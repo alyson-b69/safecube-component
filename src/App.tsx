@@ -11,6 +11,7 @@ import TemperatureCharts from "./Pages/TempertureCharts";
 import Shipments from "./Pages/Shipments";
 import ChartV2 from "./Pages/ChartV2";
 import Home from "./Pages/Home";
+import AviExp from "./Pages/AviExp";
 
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route path="/chartsv2">
                 <ChartV2 />
+            </Route>
+            <Route path="/aviexp">
+                <AviExp />
             </Route>
         </Switch>
     </div>
