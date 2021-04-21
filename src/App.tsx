@@ -19,23 +19,23 @@ function App() {
 
 
   return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
     <div className="App">
         <Header />
         <Switch>
-            <Route exact path={url}>
+            <Route exact path='/'>
                 <Home/>
             </Route>
-            <Route path={url + 'liste'}>
+            <Route path={'liste'}>
                 <Shipments />
             </Route>
-            <Route path={url + 'charts'}>
+            <Route path={'charts'}>
                 <TemperatureCharts />
             </Route>
-            <Route path={url + 'chartsv2'}>
+            <Route path={'chartsv2'}>
                 <ChartV2 />
             </Route>
-            <Route path={url + 'aviexp'}>
+            <Route path={'aviexp'}>
                 <AviExp />
             </Route>
         </Switch>
