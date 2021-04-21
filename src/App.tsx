@@ -13,12 +13,8 @@ import ChartV2 from "./Pages/ChartV2";
 import Home from "./Pages/Home";
 import AviExp from "./Pages/AviExp";
 
-const url = process.env.PUBLIC_URL;
-
 function App() {
-
-
-  return (
+    return (
       <Router basename={process.env.PUBLIC_URL}>
     <div className="App">
         <Header />
@@ -26,16 +22,16 @@ function App() {
             <Route exact path='/'>
                 <Home/>
             </Route>
-            <Route path={'liste'}>
+            <Route path={'/liste'}>
                 <Shipments />
             </Route>
-            <Route path={'charts'}>
+            <Route path={'/charts'}>
                 <TemperatureCharts />
             </Route>
-            <Route path={'chartsv2'}>
+            <Route path={'/chartsv2'}>
                 <ChartV2 />
             </Route>
-            <Route path={'aviexp'}>
+            <Route path={'/aviexp'}>
                 <AviExp />
             </Route>
         </Switch>
