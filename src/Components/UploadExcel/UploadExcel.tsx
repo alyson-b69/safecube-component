@@ -1,9 +1,10 @@
 import React from "react";
 import Dropzone from "react-dropzone";
-import { StyledUpload, StyledRender } from "./UploadExcel.style";
+import { Header, FileContent, StyledColToAffect, StyledUpload, StyledRender } from "./UploadExcel.style";
 //@ts-ignore
 import { ExcelRenderer } from "react-excel-renderer";
 import RenderTable from "./RenderTable/RenderTable";
+import ColsToAffect from "./ColsToAffect/ColsToAffect";
 
 interface Col{
     name: string,
@@ -18,6 +19,7 @@ export interface ExcelTable{
 const UploadExcel: React.FC = () => {
     const [files, setFiles] = React.useState([]);
     const [aviExp, setAviExp] = React.useState<ExcelTable>({cols:[], rows:[]});
+    const [cols, setCols] = React.useState([])
 
     React.useEffect(() => {
         files.map((file: any) => {
@@ -26,7 +28,18 @@ const UploadExcel: React.FC = () => {
                 if (err) {
                     console.log(err);
                 } else {
-                    setAviExp(resp);
+                    const newRows = resp.rows.map((row:any[]) => {
+                        let newRow = []
+                        for (let i=0; i < resp.cols.length; i++ ){
+                            if(row[i]){
+                                newRow.push(row[i]);
+                            }else {
+                                newRow.push('')
+                            }
+                        }
+                        return newRow
+                    })
+                    setAviExp({cols: resp.cols, rows: newRows} );
                 }
             });
         });
@@ -43,6 +56,9 @@ const UploadExcel: React.FC = () => {
 
     return (
         <div>
+            <Header >
+                <FileContent>
+                    <h3>1. Import your file</h3>
             <Dropzone onDrop={handleDrop} accept={".csv, .xls, .xlsx"} maxFiles={1}>
                 {({
                       getRootProps,
@@ -69,22 +85,31 @@ const UploadExcel: React.FC = () => {
                     );
                 }}
             </Dropzone>
-            <StyledRender>
-                <strong>File: </strong>{" "}
-                {files[0] && aviExp && (
-                    <>
-                        {/*@ts-ignore*/}
-                        {files[0].name}{" "}
-                        <span
-                            onClick={() => {
-                                setFiles([]);
-                            }}
-                        >
+                    <div style={{margin: '5px', minHeight: '70px'}}>
+                        <strong>File : </strong>
+                        {files[0] && aviExp && (
+                            <>
+                            {/*@ts-ignore*/}
+                            {files[0].name}{" "}
+                            <span
+                                onClick={() => {
+                                    setFiles([]);
+                                }}
+                            >
               X
             </span>
+                            </>)}
+                    </div>
+                </FileContent>
+                <StyledColToAffect>
+                    <h3>2. Assign the name of the columns</h3>
+                </StyledColToAffect>
+            </Header>
+            <StyledRender>
+                         {files[0] && aviExp && (
                         <RenderTable aviExp={aviExp} />
-                    </>
                 )}
+
             </StyledRender>
         </div>
     );

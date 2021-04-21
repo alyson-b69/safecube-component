@@ -17,10 +17,13 @@ const styledExcel = styled.div`
         background: #dddddd;
         border: solid 1px gray;
         width: 100%;
+        display:flex;
+        flex-direction: column;
       }
       & :first-child {
         width: 200px;
         border-right: solid 1px gray;
+        color: #dddddd;
       }
     }
     & tbody {

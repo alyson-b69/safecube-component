@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Some components build for Safecube project",
-  "homepage": "https://alyson-b69.github.io/safecube-component/",
+  "homepage": "https://alyson-b69.github.io/safecube-component",
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
