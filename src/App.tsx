@@ -15,7 +15,7 @@ import AviExp from "./Pages/AviExp";
 
 function App() {
     return (
-      <Router basename={'/safecube-component'}>
+      <Router basename={'/'}>
     <div className="App">
         <Header />
         <Switch>
