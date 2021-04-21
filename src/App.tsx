@@ -13,6 +13,7 @@ import ChartV2 from "./Pages/ChartV2";
 import Home from "./Pages/Home";
 import AviExp from "./Pages/AviExp";
 
+const url = process.env.PUBLIC_URL;
 
 function App() {
 
@@ -22,19 +23,19 @@ function App() {
     <div className="App">
         <Header />
         <Switch>
-            <Route exact path="/">
+            <Route exact path={url}>
                 <Home/>
             </Route>
-            <Route path="/liste">
+            <Route path={url + 'liste'}>
                 <Shipments />
             </Route>
-            <Route path="/charts">
+            <Route path={url + 'charts'}>
                 <TemperatureCharts />
             </Route>
-            <Route path="/chartsv2">
+            <Route path={url + 'chartsv2'}>
                 <ChartV2 />
             </Route>
-            <Route path="/aviexp">
+            <Route path={url + 'aviexp'}>
                 <AviExp />
             </Route>
         </Switch>
