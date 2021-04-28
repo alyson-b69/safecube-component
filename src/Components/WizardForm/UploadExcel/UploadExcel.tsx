@@ -1,25 +1,21 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, MouseEvent } from "react";
 import Dropzone from "react-dropzone";
-import { Header, FileContent, StyledColToAffect, StyledUpload, StyledRender } from "./UploadExcel.style";
+import { FileContent, StyledUpload } from "./UploadExcel.style";
 //@ts-ignore
 import { ExcelRenderer } from "react-excel-renderer";
-import RenderTable from "./RenderTable/RenderTable";
-import ColsToAffect from "./ColsToAffect/ColsToAffect";
+import ColsToAffect from "../ColsToAffect/ColsToAffect";
+import {StyledButton} from '../WizardForm.style'
 
-interface Col{
-    name: string,
-    key: number,
+export interface Props{
+   files: any;
+   setFiles: any;
+   aviExp: any;
+   setAviExp: any;
+   currentStep: number;
+   setCurrentStep: Dispatch<SetStateAction<number>>;
 }
 
-export interface ExcelTable{
-    cols: Col[];
-    rows: any[];
-}
-
-const UploadExcel: React.FC = () => {
-    const [files, setFiles] = React.useState([]);
-    const [aviExp, setAviExp] = React.useState<ExcelTable>({cols:[], rows:[]});
-    const [cols, setCols] = React.useState([])
+const UploadExcel: React.FC<Props> = ({files, setFiles, aviExp, setAviExp, currentStep, setCurrentStep}) => {
 
     React.useEffect(() => {
         files.map((file: any) => {
@@ -56,9 +52,19 @@ const UploadExcel: React.FC = () => {
 
     return (
         <div>
-            <Header >
                 <FileContent>
-                    <h3>1. Import your file</h3>
+                    <h3>Welcome to the Mass Shipment Creation Wizard</h3>
+                    <div>
+                        <p>
+                        With the Safecube solution, you can generate the creation of your shipments in bulk, through an Excel file, which we call AviExp.
+                        </p><p>
+                        The latter must at least contain the container number and the shipping number, but you can also enter a lot of information, such as the references and quantity of products present in the container, the shipping company, the port of departure, arrival, the bill of lading, the departure warehouse, the departure date etc ...
+                    </p><p>
+                        You can download a blank AviExp template <a href={"/"} title={"download template"}>here</a>.
+                    </p><p>
+                        The first step is to import your file below :
+                    </p>
+                    </div>
             <Dropzone onDrop={handleDrop} accept={".csv, .xls, .xlsx"} maxFiles={1}>
                 {({
                       getRootProps,
@@ -85,7 +91,7 @@ const UploadExcel: React.FC = () => {
                     );
                 }}
             </Dropzone>
-                    <div style={{margin: '5px', minHeight: '70px'}}>
+                    <div style={{margin: '10px auto', minHeight: '50px', textAlign: 'center'}}>
                         <strong>File : </strong>
                         {files[0] && aviExp && (
                             <>
@@ -100,17 +106,14 @@ const UploadExcel: React.FC = () => {
             </span>
                             </>)}
                     </div>
+                    <StyledButton
+                        type={'button'}
+                        disabled={files[0]? false : true}
+                        onClick={() => {setCurrentStep(2)}}
+                    >
+                        Import AviExp
+                    </StyledButton>
                 </FileContent>
-                <StyledColToAffect>
-                    <h3>2. Assign the name of the columns</h3>
-                </StyledColToAffect>
-            </Header>
-            <StyledRender>
-                         {files[0] && aviExp && (
-                        <RenderTable aviExp={aviExp} />
-                )}
-
-            </StyledRender>
         </div>
     );
 };

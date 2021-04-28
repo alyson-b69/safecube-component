@@ -16,12 +16,12 @@ const styledExcel = styled.div`
       & th {
         background: #dddddd;
         border: solid 1px gray;
-        width: 100%;
+        width: 150px;
         display:flex;
         flex-direction: column;
       }
       & :first-child {
-        width: 200px;
+        width: 20px;
         border-right: solid 1px gray;
         color: #dddddd;
       }
@@ -33,7 +33,7 @@ const styledExcel = styled.div`
       & tr {
         display: flex;
         & th {
-          width: 200px;
+          width: 20px;
           border: solid 1px gray;
           margin-left: -1px;
           border-right: solid 1px gray;
@@ -42,7 +42,7 @@ const styledExcel = styled.div`
         }
         & td {
           border: solid 1px lightgray;
-          width: 100%;
+          width: 150px;
         }
         & :nth-child(2) {
           border-left: solid 1px gray;

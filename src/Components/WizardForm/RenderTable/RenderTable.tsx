@@ -1,6 +1,6 @@
 import StyledExcel from "./RenderTable.style";
 import React from "react";
-import {ExcelTable} from "../UploadExcel";
+import {ExcelTable} from "../WizardForm";
 import SelectLabelCol from "./SelectLabelCol/SelectLabelCol";
 
 interface Props {
@@ -18,7 +18,7 @@ const RenderTable: React.FC<Props> = ({ aviExp }) => {
                     <tr>
                         <th>x</th>
                         {aviExp.cols.map((col) => {
-                            return <th key={col.key}>{col.name} <SelectLabelCol col={col.name}/></th>;
+                            return <th key={col.key}>{col.name}</th>;
                         })}
                     </tr>
                     </thead>

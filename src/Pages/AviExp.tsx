@@ -1,5 +1,5 @@
 import React from "react";
-import UploadExcel from '../Components/UploadExcel/UploadExcel'
+import WizardForm from '../Components/WizardForm/WizardForm'
 
 
 const AviExp = () => {
@@ -7,7 +7,7 @@ const AviExp = () => {
     return (
         <>
             <h1>Upload AviExp</h1>
-            <UploadExcel />
+            <WizardForm />
         </>
     )
 };
