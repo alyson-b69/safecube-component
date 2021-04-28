@@ -14,10 +14,10 @@ const WizardTimeline: React.FC<Props> = ({currentStep, steps}) => {
                 const stepIsDone: boolean = Math.floor(currentStep) > step.id;
                 const displayValidatedIcon: boolean = stepIsDone && !isCurrentStep;
                 if(index === steps.length - 1){
-                    return <TimelineBubble isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/> : step.id}</TimelineBubble>
+                    return <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/> : step.id}</TimelineBubble>
                 } else {
                     return(
-                    <TimelineBubble isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/>  : step.id}
+                    <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/>  : step.id}
                         <TimelineBar isDone={stepIsDone} />
                     </TimelineBubble>
                     )
@@ -25,6 +25,6 @@ const WizardTimeline: React.FC<Props> = ({currentStep, steps}) => {
             })}
         </TimelineContainer>
     )
-}
+};
 
 export default WizardTimeline;
