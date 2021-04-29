@@ -2,7 +2,8 @@ import React from "react";
 import RenderTable from "../RenderTable/RenderTable";
 import {ExcelTable} from "../WizardForm";
 import { StyledButton } from "../WizardForm.style";
-import {AssignContainer, WrapperSessionAssignment, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
+import { AssignContainer, WrapperSessionAssignment, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
+import WrittenEffect from '../WrittenEffect/WrittenEffect';
 
 interface Props {
     aviExp: ExcelTable;
@@ -94,10 +95,10 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
             </WrapperSessionAssignment>
             <ThingToDo>
                 {actualCompulsoryAssignment !== null
-                    ? <h3>Click on the <strong>{compulsoryAssignments[actualCompulsoryAssignment].name}</strong> column <span>↓</span></h3>
+                    ? <h3> <WrittenEffect string={`Click on the ${compulsoryAssignments[actualCompulsoryAssignment].name} column`} /> <span>↓</span></h3>
                     : actualOptionnalAssignment !== null
-                        ? <h3>Click on the <strong>{optionnalAssignments[actualOptionnalAssignment].name}</strong> column <span>↓</span></h3>
-                        : <h3>Choose a <strong>block</strong> to assign <span>↑</span></h3>
+                        ? <h3> <WrittenEffect string={`Click on the ${optionnalAssignments[actualOptionnalAssignment].name} column`}/> <span>↓</span></h3>
+                        : <h3><WrittenEffect string={`Choose a block to assign `}/> <span>↑</span></h3>
                 }
 
             </ThingToDo>
@@ -112,6 +113,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                          actualOptionnalAssignment={actualOptionnalAssignment}
                          setActualOptionnalAssignment={setActualOptionnalAssignment}
             />
+
             <StyledButton disabled={!compulsoryAssignments.every(col => col.columnIndex !== null)}>Upload AviExp</StyledButton>
         </AssignContainer>
     )

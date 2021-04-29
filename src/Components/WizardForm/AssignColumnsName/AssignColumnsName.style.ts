@@ -64,12 +64,7 @@ export const Bloc = styled.div<{status: string, disabled:boolean}>`
 `
 
 export const ThingToDo = styled.div`
-  cusor: default;
-  width: 100%;
-  text-align: center;
-  & strong{
-    color: #2088E9;
-  }
+
   @keyframes updown {
     0% {
       transform: translateY(0px);
@@ -81,6 +76,19 @@ export const ThingToDo = styled.div`
       transform: translateY(0px);
     }
   }
+  
+  cusor: default;
+  text-align: center;
+  
+  & h3{
+    line-height: 1.17em;
+    transition: all ease-in-out 1s;
+  }
+  
+  & strong{
+    color: #2088E9;
+  }
+ 
   & span{
     font-weight: bold;
     color: #2088E9;
