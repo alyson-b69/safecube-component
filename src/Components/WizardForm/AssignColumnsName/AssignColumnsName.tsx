@@ -57,7 +57,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
     return (
         <AssignContainer>
             <h3>Assign the name of columns</h3>
-            <p>Web need to know what each columns corresponds to in order to process the masse creation of your
+            <p>We need to know what each columns corresponds to in order to process the masse creation of your
                 shipments.</p>
             <WrapperSessionAssignment>
             <SessionAssignment disabled={false}>

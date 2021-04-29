@@ -42,8 +42,8 @@ export const Bloc = styled.div<{status: string, disabled:boolean}>`
   transition: all ease-in-out 0.4s;
   transform: ${props => props.status === 'selected' ? 'translateY(-5px)' : 'inherit'};
   &:hover{
-    transform: translateY(-5px);
-    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.2);
+    transform: ${props => props.disabled ? 'inherit' : 'translateY(-5px)'};
+    box-shadow: ${props => props.disabled ? 'inherit' : '0px 16px 40px rgba(0, 0, 0, 0.2)'};
   }
   & h4{
     transition: all ease-in-out 0.4s;
