@@ -1,4 +1,4 @@
-import {TimelineContainer, TimelineBubble, TimelineBar, ValidatedIcon} from './WizardTimeline.style'
+import {TimelineContainer, TimelineBubble, TimelineBar, TimelineTitle, ValidatedIcon} from './WizardTimeline.style'
 
 interface Props{
     currentStep: number;
@@ -14,11 +14,14 @@ const WizardTimeline: React.FC<Props> = ({currentStep, steps}) => {
                 const stepIsDone: boolean = Math.floor(currentStep) > step.id;
                 const displayValidatedIcon: boolean = stepIsDone && !isCurrentStep;
                 if(index === steps.length - 1){
-                    return <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/> : step.id}</TimelineBubble>
+                    return <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/> : step.id}
+                    <TimelineTitle isActive={isCurrentStep}>{step.name}</TimelineTitle>
+                    </TimelineBubble>
                 } else {
                     return(
                     <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/>  : step.id}
                         <TimelineBar isDone={stepIsDone} />
+                        <TimelineTitle isActive={isCurrentStep}>{step.name}</TimelineTitle>
                     </TimelineBubble>
                     )
                 }

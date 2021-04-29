@@ -3,7 +3,6 @@ import Dropzone from "react-dropzone";
 import { FileContent, StyledUpload } from "./UploadExcel.style";
 //@ts-ignore
 import { ExcelRenderer } from "react-excel-renderer";
-import ColsToAffect from "../ColsToAffect/ColsToAffect";
 import {StyledButton} from '../WizardForm.style'
 
 export interface Props{

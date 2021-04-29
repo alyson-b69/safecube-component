@@ -2,7 +2,7 @@ import React from "react";
 import RenderTable from "../RenderTable/RenderTable";
 import {ExcelTable} from "../WizardForm";
 import { StyledButton } from "../WizardForm.style";
-import {AssignContainer, SessionAssignment, Bloc} from './AssignColumnsName.style';
+import {AssignContainer, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
 
 interface Props {
     aviExp: ExcelTable;
@@ -91,7 +91,15 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                 </div>
             </SessionAssignment>
 
-            <div><h3>THINGS TO DO</h3></div>
+            <ThingToDo>
+                {actualCompulsoryAssignment !== null
+                    ? <h3>Click on the <strong>{compulsoryAssignments[actualCompulsoryAssignment].name}</strong> column <span>↓</span></h3>
+                    : actualOptionnalAssignment !== null
+                        ? <h3>Click on the <strong>{optionnalAssignments[actualOptionnalAssignment].name}</strong> column <span>↓</span></h3>
+                        : <h3>Choose a <strong>block</strong> to assign <span>↑</span></h3>
+                }
+
+            </ThingToDo>
 
             <RenderTable aviExp={aviExp}
                          compulsoryAssignments={compulsoryAssignments}

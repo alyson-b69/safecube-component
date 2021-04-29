@@ -55,3 +55,32 @@ export const Bloc = styled.div<{status: string, disabled:boolean}>`
     }
   }
 `
+
+export const ThingToDo = styled.div`
+  cusor: default;
+  width: 100%;
+  text-align: left;
+  & strong{
+    color: #2088E9;
+  }
+  @keyframes updown {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform : translateY(-5px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  & span{
+    font-weight: bold;
+    color: #2088E9;
+    display:inline-block;
+    // transition: all ease-in-out 1s;
+    animation: updown 1s infinite;
+  }
+
+`
+

@@ -5,7 +5,7 @@ export const TimelineContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin: 20px auto;
+  margin: 20px auto 40px auto;
 `
 
 export const TimelineBubble = styled.div<{isActive: boolean, isDone:boolean}>`
@@ -39,4 +39,14 @@ export const ValidatedIcon = styled.span`
   background: #fff;
   mask-image: url(${checkmarkDone});
   mask-size: contain;
+`
+export const TimelineTitle = styled.span<{isActive:boolean}>`
+  text-transform: uppercase;
+  position: absolute;
+  color: ${props => props.isActive ? '#3D3D3B' : '#979797'};
+  text-align: center;
+  top: 40px;
+  font-size: 10px;
+  width: 100px;
+  left: -50%;
 `
