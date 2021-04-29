@@ -2,7 +2,7 @@ import React from "react";
 import RenderTable from "../RenderTable/RenderTable";
 import {ExcelTable} from "../WizardForm";
 import { StyledButton } from "../WizardForm.style";
-import {AssignContainer, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
+import {AssignContainer, WrapperSessionAssignment, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
 
 interface Props {
     aviExp: ExcelTable;
@@ -59,7 +59,8 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
             <h3>Assign the name of columns</h3>
             <p>Web need to know what each columns corresponds to in order to process the masse creation of your
                 shipments.</p>
-            <SessionAssignment>
+            <WrapperSessionAssignment>
+            <SessionAssignment disabled={false}>
                 <h4>Compulsory assignments</h4>
                 <p>To be abble to send your aviExp, you must at least assign the following columns : </p>
                 <div>
@@ -74,7 +75,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                 </div>
             </SessionAssignment>
 
-            <SessionAssignment>
+            <SessionAssignment disabled={!compulsoryAssignments.every(col => col.columnIndex !== null)}>
                 <h4>Optionnal assignments</h4>
                 <p>Pour avoir plus de renseignements : </p>
                 <div>
@@ -90,7 +91,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                     })}
                 </div>
             </SessionAssignment>
-
+            </WrapperSessionAssignment>
             <ThingToDo>
                 {actualCompulsoryAssignment !== null
                     ? <h3>Click on the <strong>{compulsoryAssignments[actualCompulsoryAssignment].name}</strong> column <span>↓</span></h3>

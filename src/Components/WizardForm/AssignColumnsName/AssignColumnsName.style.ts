@@ -5,14 +5,21 @@ export const AssignContainer = styled.div`
   flex-direction: column;
 `
 
-export const SessionAssignment = styled.div`
+export const WrapperSessionAssignment = styled.div`
+  display: flex;
+`
+
+export const SessionAssignment = styled.div<{disabled: boolean}>`
   padding: 20px;
-  margin-bottom: 20px;
   background: #f4f4f4;
   border-radius: 5px;
   display:flex;
   flex-direction: column;
   text-align: left;
+  color: ${props => props.disabled ? '#C4C4C4' : '' };
+  &:first-of-type{
+    margin-right: 20px;
+  }
   & h4{
     margin: 0;
   }
@@ -59,7 +66,7 @@ export const Bloc = styled.div<{status: string, disabled:boolean}>`
 export const ThingToDo = styled.div`
   cusor: default;
   width: 100%;
-  text-align: left;
+  text-align: center;
   & strong{
     color: #2088E9;
   }
