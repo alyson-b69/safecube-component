@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/safecube-component/static/css/main.266bd370.chunk.css",
-    "main.js": "/safecube-component/static/js/main.c63f10c9.chunk.js",
-    "main.js.map": "/safecube-component/static/js/main.c63f10c9.chunk.js.map",
+    "main.js": "/safecube-component/static/js/main.073d682c.chunk.js",
+    "main.js.map": "/safecube-component/static/js/main.073d682c.chunk.js.map",
     "runtime-main.js": "/safecube-component/static/js/runtime-main.a64cc8b7.js",
     "runtime-main.js.map": "/safecube-component/static/js/runtime-main.a64cc8b7.js.map",
-    "static/js/2.b8c92ac7.chunk.js": "/safecube-component/static/js/2.b8c92ac7.chunk.js",
-    "static/js/2.b8c92ac7.chunk.js.map": "/safecube-component/static/js/2.b8c92ac7.chunk.js.map",
+    "static/js/2.a2fbb608.chunk.js": "/safecube-component/static/js/2.a2fbb608.chunk.js",
+    "static/js/2.a2fbb608.chunk.js.map": "/safecube-component/static/js/2.a2fbb608.chunk.js.map",
     "index.html": "/safecube-component/index.html",
     "static/css/main.266bd370.chunk.css.map": "/safecube-component/static/css/main.266bd370.chunk.css.map",
-    "static/js/2.b8c92ac7.chunk.js.LICENSE.txt": "/safecube-component/static/js/2.b8c92ac7.chunk.js.LICENSE.txt",
+    "static/js/2.a2fbb608.chunk.js.LICENSE.txt": "/safecube-component/static/js/2.a2fbb608.chunk.js.LICENSE.txt",
     "static/media/checkmark-done.9d2106b8.svg": "/safecube-component/static/media/checkmark-done.9d2106b8.svg",
     "static/media/location.ebf29794.svg": "/safecube-component/static/media/location.ebf29794.svg",
     "static/media/view-more.5c520c04.svg": "/safecube-component/static/media/view-more.5c520c04.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a64cc8b7.js",
-    "static/js/2.b8c92ac7.chunk.js",
+    "static/js/2.a2fbb608.chunk.js",
     "static/css/main.266bd370.chunk.css",
-    "static/js/main.c63f10c9.chunk.js"
+    "static/js/main.073d682c.chunk.js"
   ]
 }
