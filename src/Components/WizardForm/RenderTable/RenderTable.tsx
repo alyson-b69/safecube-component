@@ -7,8 +7,8 @@ interface Props {
     aviExp: ExcelTable;
     compulsoryAssignments: any[];
     setCompulsoryAssignments: Dispatch<SetStateAction<any>>;
-    actualAssignment: number;
-    setActualAssigment: Dispatch<SetStateAction<number>>;
+    actualAssignment: number | null;
+    setActualAssigment: Dispatch<SetStateAction<number|null>>;
     optionnalAssignments: any[];
     setOptionnalAssignments: Dispatch<SetStateAction<any>>;
     actualOptionnalAssignment: number | null;
@@ -28,8 +28,8 @@ const RenderTable: React.FC<Props> = ({
                                       }) => {
 
     const [indexHover, setIndexHover] = React.useState<number | null>(null);
-    const [isAssignmentAction, setisAssignmentAction] = React.useState<boolean>(true)
 
+    const isAssigning = actualAssignment !== null || actualOptionnalAssignment !== null
 
     const handleHover = (index: number) => {
         setIndexHover(index);
@@ -37,13 +37,15 @@ const RenderTable: React.FC<Props> = ({
 
     const handleAssign = (index: number) => {
         const colName = aviExp.cols[index].name;
-        if (!compulsoryAssignments.every(col => col.columnIndex !== null)) {
+        if (!compulsoryAssignments.every(col => col.columnIndex !== null) && actualAssignment !== null) {
             let compulsoryAssignmentsTmp = [...[], ...compulsoryAssignments];
             compulsoryAssignmentsTmp[actualAssignment].columnName = colName;
             compulsoryAssignmentsTmp[actualAssignment].columnIndex = index;
             setCompulsoryAssignments(compulsoryAssignmentsTmp);
-            if (actualAssignment < compulsoryAssignments.length) {
+            if (actualAssignment < compulsoryAssignments.length -1) {
                 setActualAssigment(actualAssignment + 1)
+            } else{
+                setActualAssigment(null);
             }
         } else {
             if (actualOptionnalAssignment !==null) {
@@ -70,7 +72,7 @@ const RenderTable: React.FC<Props> = ({
                             }} onMouseLeave={() => setIndexHover(null)} onClick={() => {
                                 handleAssign(index)
                             }}
-                                       className={isAssigned ? 'assigned' : index === indexHover && isAssignmentAction ? 'hover' : ''}>
+                                       className={isAssigned ? 'assigned' : index === indexHover && isAssigning ? 'hover' : ''}>
                                 {isAssigned ?
                                     compulsoryAssignments.filter(item => item.columnName === col.name)[0] ?
                                         compulsoryAssignments.filter(item => item.columnName === col.name)[0].name
@@ -94,7 +96,7 @@ const RenderTable: React.FC<Props> = ({
                                         handleHover(index)
                                     }} onMouseLeave={() => setIndexHover(null)}
                                                onClick={()=> handleAssign(index)}
-                                               className={isAssigned ? 'assigned' : indexHover === index && isAssignmentAction ? 'hover' : ''}>{cell}</td>;
+                                               className={isAssigned ? 'assigned' : indexHover === index && isAssigning ? 'hover' : ''}>{cell}</td>;
                                 })}
                             </tr>
                         );

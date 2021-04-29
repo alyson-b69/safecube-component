@@ -63,8 +63,6 @@ export const StyledUpload = styled.div`
 `;
 
 export default {
-
     FileContent,
     StyledUpload,
-
 };

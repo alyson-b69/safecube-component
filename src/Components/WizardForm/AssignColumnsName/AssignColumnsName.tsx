@@ -1,6 +1,7 @@
 import React from "react";
 import RenderTable from "../RenderTable/RenderTable";
 import {ExcelTable} from "../WizardForm";
+import { StyledButton } from "../WizardForm.style";
 import {AssignContainer, SessionAssignment, Bloc} from './AssignColumnsName.style';
 
 interface Props {
@@ -19,7 +20,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
         columnName: null,
         columnIndex: null
     }]);
-    const [actualCompulsoryAssignment, setActualCompulsoryAssignment] = React.useState(0)
+    const [actualCompulsoryAssignment, setActualCompulsoryAssignment] = React.useState<number|null>(0)
     const [optionnalAssignments, setOptionnalAssignments] = React.useState([{
         id: 1,
         name: 'Carrier',
@@ -75,7 +76,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
 
             <SessionAssignment>
                 <h4>Optionnal assignments</h4>
-                <p>Pour avoir plus de renseignements: : </p>
+                <p>Pour avoir plus de renseignements : </p>
                 <div>
                     {optionnalAssignments.map((colToAssign, index) => {
                         const isAssigned = colToAssign.columnName ? true : false;
@@ -90,6 +91,8 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                 </div>
             </SessionAssignment>
 
+            <div><h3>THINGS TO DO</h3></div>
+
             <RenderTable aviExp={aviExp}
                          compulsoryAssignments={compulsoryAssignments}
                          setCompulsoryAssignments={setCompulsoryAssignments}
@@ -100,6 +103,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                          actualOptionnalAssignment={actualOptionnalAssignment}
                          setActualOptionnalAssignment={setActualOptionnalAssignment}
             />
+            <StyledButton disabled={!compulsoryAssignments.every(col => col.columnIndex !== null)}>Upload AviExp</StyledButton>
         </AssignContainer>
     )
 }

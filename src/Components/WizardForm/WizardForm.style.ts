@@ -24,7 +24,9 @@ export const StyledButton = styled.button`
   font-weight: 700;
   min-width: 160px;
   cursor: pointer;
+  transition: all ease-in-out 0.4s;
   &:disabled{
     background-color: #C4C4C4;
+    cursor: default;
   }
 `

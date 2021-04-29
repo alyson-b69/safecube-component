@@ -6,7 +6,6 @@ export const AssignContainer = styled.div`
 `
 
 export const SessionAssignment = styled.div`
-  // width: calc(100% - 20px);
   padding: 20px;
   margin-bottom: 20px;
   background: #f4f4f4;
@@ -16,7 +15,6 @@ export const SessionAssignment = styled.div`
   text-align: left;
   & h4{
     margin: 0;
-    height: ;
   }
   & div{
     display:flex;
@@ -34,14 +32,22 @@ export const Bloc = styled.div<{status: string, disabled:boolean}>`
   width: 150px;
   box-shadow: ${props => props.status === 'selected' ? '0 0 10px rgba(32, 136, 233, 0.63)' : 'inherit'};
   cursor: ${props => props.disabled ? 'default' : 'pointer'};
+  transition: all ease-in-out 0.4s;
+  transform: ${props => props.status === 'selected' ? 'translateY(-5px)' : 'inherit'};
+  &:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.2);
+  }
   & h4{
+    transition: all ease-in-out 0.4s;
     background:${(props)=> props.disabled ? '#C4C4C4' : props.status === 'selected' ? '#2088E9' : props.status === 'assigned' ? '#7EB279' : '#FB9600'};
     padding: 5px;
     color: #ffffff;
     font-size: 12px;
   }
   & p{
-    font-size: 14px;
+    transition: all ease-in-out 0.4s;
+    font-size: 12px;
     margin: 5px 10px;
     &.not-assigned{
       color: #C4C4C4;
