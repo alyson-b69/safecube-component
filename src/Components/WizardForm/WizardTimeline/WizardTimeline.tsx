@@ -1,4 +1,5 @@
-import {TimelineContainer, TimelineBubble, TimelineBar, TimelineTitle, ValidatedIcon} from './WizardTimeline.style'
+import FillingEffect from '../AnimationsEffect/FillingEffect';
+import {TimelineContainer, TimelineBubble, TimelineBar, TimelineBarFill, TimelineTitle, ValidatedIcon} from './WizardTimeline.style'
 
 interface Props{
     currentStep: number;
@@ -6,7 +7,7 @@ interface Props{
 }
 
 const WizardTimeline: React.FC<Props> = ({currentStep, steps}) => {
-    
+
     return (
         <TimelineContainer>
             {steps.map((step, index)=> {
@@ -20,7 +21,7 @@ const WizardTimeline: React.FC<Props> = ({currentStep, steps}) => {
                 } else {
                     return(
                     <TimelineBubble key={index} isActive={isCurrentStep} isDone={stepIsDone}>{displayValidatedIcon ? <ValidatedIcon/>  : step.id}
-                        <TimelineBar isDone={stepIsDone} />
+                        <TimelineBar><FillingEffect isDone={stepIsDone}/></TimelineBar>
                         <TimelineTitle isActive={isCurrentStep}>{step.name}</TimelineTitle>
                     </TimelineBubble>
                     )

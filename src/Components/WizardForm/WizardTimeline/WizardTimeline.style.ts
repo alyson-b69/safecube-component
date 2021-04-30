@@ -17,11 +17,12 @@ export const TimelineBubble = styled.div<{isActive: boolean, isDone:boolean}>`
   font-weight: bold;
   color: ${props => props.isActive || props.isDone ? '#ffffff' : '#979797'};
   position: relative;
+  transition: all ease-in-out 1.5s;
 `
 
-export const TimelineBar = styled.span<{isDone: boolean}>`
+export const TimelineBar = styled.span`
   position:absolute;
-  background: ${props => props.isDone ? '#7EB279' : '#EEEEEE'};
+  background: #EEEEEE;
   width: 22vw;
   height: 8px;
   font-weight: bold;
@@ -29,6 +30,14 @@ export const TimelineBar = styled.span<{isDone: boolean}>`
   left:40px;
   z-index: -1;
 `
+
+export const TimelineBarFill = styled.span<{isDone: boolean, width:number}>`
+  background: ${props => props.isDone ? '#7EB279' : '#EEEEEE'};
+  height: 8px;
+  display:block;
+  content: '';
+  width: ${props => props.width}%;
+`;
 
 export const ValidatedIcon = styled.span`
   content: '';

@@ -3,7 +3,7 @@ import RenderTable from "../RenderTable/RenderTable";
 import {ExcelTable} from "../WizardForm";
 import { StyledButton } from "../WizardForm.style";
 import { AssignContainer, WrapperSessionAssignment, SessionAssignment, Bloc, ThingToDo} from './AssignColumnsName.style';
-import WrittenEffect from '../WrittenEffect/WrittenEffect';
+import WrittenEffect from '../AnimationsEffect/WrittenEffect';
 
 interface Props {
     aviExp: ExcelTable;
@@ -95,10 +95,10 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
             </WrapperSessionAssignment>
             <ThingToDo>
                 {actualCompulsoryAssignment !== null
-                    ? <h3> <WrittenEffect string={`Click on the ${compulsoryAssignments[actualCompulsoryAssignment].name} column`} /> <span>↓</span></h3>
+                    ? <h3> <WrittenEffect string={'Click on the'} strong={compulsoryAssignments[actualCompulsoryAssignment].name} end={'column'} /> <span>↓</span></h3>
                     : actualOptionnalAssignment !== null
-                        ? <h3> <WrittenEffect string={`Click on the ${optionnalAssignments[actualOptionnalAssignment].name} column`}/> <span>↓</span></h3>
-                        : <h3><WrittenEffect string={`Choose a block to assign `}/> <span>↑</span></h3>
+                        ? <h3> <WrittenEffect string={'Click on the'} strong={optionnalAssignments[actualOptionnalAssignment].name} end={'column'} /> <span>↓</span></h3>
+                        : <h3><WrittenEffect string={'Choose a'} strong={'block'} end={'to assign'}/> <span>↑</span></h3>
                 }
 
             </ThingToDo>
