@@ -34,9 +34,20 @@ const styledExcel = styled.div`
         border: solid 1px ${color.border};
         width: 150px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
+        position: relative;
+        
+        & span{
+          color: #F3685C;
+          right: 8px;
+          position: absolute;
+          cursor: pointer;
+          &:hover{
+            color:#CE2C1E;
+          }
+        }
 
         &.hover {
           background: ${color.blue};
@@ -53,7 +64,7 @@ const styledExcel = styled.div`
         }
       }
 
-      & :first-child {
+      & th:first-of-type {
         width: 20px;
         border-right: solid 1px ${color.border};
         color: ${color.background};

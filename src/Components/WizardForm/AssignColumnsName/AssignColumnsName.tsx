@@ -83,10 +83,11 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                     {optionnalAssignments.map((colToAssign, index) => {
                         const isAssigned = colToAssign.columnName ? true : false;
                         const isSelected = actualOptionnalAssignment === index;
+                        const isDisabled = !compulsoryAssignments.every(col => col.columnIndex !== null)
                         return <Bloc key={index}
-                            disabled={!compulsoryAssignments.every(col => col.columnIndex !== null)}
+                            disabled={isDisabled}
                             status={isSelected ? 'selected' : isAssigned ? 'assigned' : ''}
-                                     onClick={() => setActualOptionnalAssignment(index)}><h4>{colToAssign.name}</h4> <p
+                                     onClick={() => !isDisabled && setActualOptionnalAssignment(isSelected? null : index)}><h4>{colToAssign.name}</h4> <p
                             className={isAssigned ? '' : 'not-assigned'}>{isAssigned ? `Column ${colToAssign.columnName}` : 'No column specified '}</p>
                         </Bloc>
                     })}

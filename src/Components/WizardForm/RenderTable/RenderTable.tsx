@@ -1,7 +1,6 @@
 import StyledExcel from "./RenderTable.style";
 import React, {Dispatch, SetStateAction} from "react";
 import {ExcelTable} from "../WizardForm";
-import SelectLabelCol from "./SelectLabelCol/SelectLabelCol";
 
 interface Props {
     aviExp: ExcelTable;
@@ -28,8 +27,9 @@ const RenderTable: React.FC<Props> = ({
                                       }) => {
 
     const [indexHover, setIndexHover] = React.useState<number | null>(null);
-
     const isAssigning = actualAssignment !== null || actualOptionnalAssignment !== null
+    const allCompulsoryAreAssigned = compulsoryAssignments.every(col => col.columnIndex !== null);
+
 
     const handleHover = (index: number) => {
         setIndexHover(index);
@@ -37,12 +37,13 @@ const RenderTable: React.FC<Props> = ({
 
     const handleAssign = (index: number) => {
         const colName = aviExp.cols[index].name;
-        if (!compulsoryAssignments.every(col => col.columnIndex !== null) && actualAssignment !== null) {
+        if (!allCompulsoryAreAssigned && actualAssignment !== null) {
             let compulsoryAssignmentsTmp = [...[], ...compulsoryAssignments];
             compulsoryAssignmentsTmp[actualAssignment].columnName = colName;
             compulsoryAssignmentsTmp[actualAssignment].columnIndex = index;
             setCompulsoryAssignments(compulsoryAssignmentsTmp);
-            if (actualAssignment < compulsoryAssignments.length -1) {
+            const everyCommpulsoryWillBeAssigned = compulsoryAssignmentsTmp.every(col => col.columnIndex !== null);
+            if (actualAssignment < compulsoryAssignments.length -1 && !everyCommpulsoryWillBeAssigned) {
                 setActualAssigment(actualAssignment + 1)
             } else{
                 setActualAssigment(null);
@@ -56,6 +57,25 @@ const RenderTable: React.FC<Props> = ({
                 setActualOptionnalAssignment(null)
             }
         }
+    }
+
+    const handleUnassign = (index: number, type: string) => {
+        const colName = aviExp.cols[index].name;
+        if(type === 'optional'){
+            let indexToChange = optionnalAssignments.findIndex(assignment => assignment.columnName === colName);
+            let optionnalAssignmentsTmp = [...[], ...optionnalAssignments];
+            optionnalAssignmentsTmp[indexToChange].columnName = '';
+            optionnalAssignmentsTmp[indexToChange].columnIndex = null;
+            setOptionnalAssignments(optionnalAssignmentsTmp);
+        } else {
+            let indexToChange = compulsoryAssignments.findIndex(assignment => assignment.columnName === colName);
+            let compulsoryAssignmentsTmp = [...[], ...compulsoryAssignments];
+            compulsoryAssignmentsTmp[indexToChange].columnName = '';
+            compulsoryAssignmentsTmp[indexToChange].columnIndex = null;
+            setCompulsoryAssignments(compulsoryAssignmentsTmp);
+            setActualAssigment(indexToChange);
+        }
+
     }
 
     return (
@@ -75,8 +95,8 @@ const RenderTable: React.FC<Props> = ({
                                        className={isAssigned ? 'assigned' : index === indexHover && isAssigning ? 'hover' : ''}>
                                 {isAssigned ?
                                     compulsoryAssignments.filter(item => item.columnName === col.name)[0] ?
-                                        compulsoryAssignments.filter(item => item.columnName === col.name)[0].name
-                                        : optionnalAssignments.filter(item => item.columnName === col.name)[0].name
+                                        <> {compulsoryAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=>handleUnassign(index, 'compulsory')}> X </span></>
+                                        : <>{optionnalAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=>handleUnassign(index, 'optional')}> X </span></>
                                     : col.name}
                             </th>;
                         })}
