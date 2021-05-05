@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/safecube-component/static/css/main.266bd370.chunk.css",
-    "main.js": "/safecube-component/static/js/main.b45b7da3.chunk.js",
-    "main.js.map": "/safecube-component/static/js/main.b45b7da3.chunk.js.map",
+    "main.js": "/safecube-component/static/js/main.ce6662e0.chunk.js",
+    "main.js.map": "/safecube-component/static/js/main.ce6662e0.chunk.js.map",
     "runtime-main.js": "/safecube-component/static/js/runtime-main.a64cc8b7.js",
     "runtime-main.js.map": "/safecube-component/static/js/runtime-main.a64cc8b7.js.map",
     "static/js/2.f11bb71c.chunk.js": "/safecube-component/static/js/2.f11bb71c.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.a64cc8b7.js",
     "static/js/2.f11bb71c.chunk.js",
     "static/css/main.266bd370.chunk.css",
-    "static/js/main.b45b7da3.chunk.js"
+    "static/js/main.ce6662e0.chunk.js"
   ]
 }
