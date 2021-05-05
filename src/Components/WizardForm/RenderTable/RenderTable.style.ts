@@ -83,7 +83,7 @@ const styledExcel = styled.div`
         &:nth-child(even){
           background: ${color.backgroundCell};
         }
-
+        
         & th {
           width: 20px;
           border: solid 1px ${color.border};
@@ -114,12 +114,25 @@ const styledExcel = styled.div`
           &.assigned{
             background: ${color.lightGeen};
             border-color: ${color.lightGeen};
-            
           }
         }
 
         & :nth-child(2) {
           border-left: solid 1px ${color.border};
+        }
+        
+        &.not-good-data{
+          & td{
+            &.hover{
+              background-color: transparent;
+              border: solid 1px ${color.border};
+            }
+            &.assigned{
+              background-color: transparent;
+              border: solid 1px ${color.border};
+            }
+          }
+          
         }
       }
     }

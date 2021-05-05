@@ -12,6 +12,8 @@ interface Props {
     setOptionnalAssignments: Dispatch<SetStateAction<any>>;
     actualOptionnalAssignment: number | null;
     setActualOptionnalAssignment: Dispatch<SetStateAction<number | null>>;
+    startingRow: number;
+    setStartingRow: Dispatch<SetStateAction<number>>;
 }
 
 const RenderTable: React.FC<Props> = ({
@@ -23,13 +25,15 @@ const RenderTable: React.FC<Props> = ({
                                           optionnalAssignments,
                                           setOptionnalAssignments,
                                           actualOptionnalAssignment,
-                                          setActualOptionnalAssignment
+                                          setActualOptionnalAssignment,
+                                          startingRow,
+                                          setStartingRow
                                       }) => {
 
     const [indexHover, setIndexHover] = React.useState<number | null>(null);
     const isAssigning = actualAssignment !== null || actualOptionnalAssignment !== null
     const allCompulsoryAreAssigned = compulsoryAssignments.every(col => col.columnIndex !== null);
-
+    const regexContainerPattern = /^\w{4}\s?\d{7}$/;
 
     const handleHover = (index: number) => {
         setIndexHover(index);
@@ -43,10 +47,21 @@ const RenderTable: React.FC<Props> = ({
             compulsoryAssignmentsTmp[actualAssignment].columnIndex = index;
             setCompulsoryAssignments(compulsoryAssignmentsTmp);
             const everyCommpulsoryWillBeAssigned = compulsoryAssignmentsTmp.every(col => col.columnIndex !== null);
-            if (actualAssignment < compulsoryAssignments.length -1 && !everyCommpulsoryWillBeAssigned) {
+
+            if(everyCommpulsoryWillBeAssigned){
+                setActualAssigment(null)
+            }else if(actualAssignment < compulsoryAssignments.length -1){
                 setActualAssigment(actualAssignment + 1)
-            } else{
-                setActualAssigment(null);
+            }else{
+                const needAssignmentIndex = compulsoryAssignmentsTmp.findIndex((item)=> item.columnIndex === null);
+                setActualAssigment(needAssignmentIndex);
+            }
+
+            if(actualAssignment === 0){
+                let findIndex = aviExp.rows.findIndex((row) => {
+                  return regexContainerPattern.test(row[index]) === true;
+                })
+                findIndex>-1 && setStartingRow(findIndex+1);
             }
         } else {
             if (actualOptionnalAssignment !==null) {
@@ -75,7 +90,6 @@ const RenderTable: React.FC<Props> = ({
             setCompulsoryAssignments(compulsoryAssignmentsTmp);
             setActualAssigment(indexToChange);
         }
-
     }
 
     return (
@@ -90,13 +104,13 @@ const RenderTable: React.FC<Props> = ({
                             return <th key={col.key} onMouseEnter={() => {
                                 handleHover(index)
                             }} onMouseLeave={() => setIndexHover(null)} onClick={() => {
-                                handleAssign(index)
+                               !isAssigned && handleAssign(index)
                             }}
                                        className={isAssigned ? 'assigned' : index === indexHover && isAssigning ? 'hover' : ''}>
                                 {isAssigned ?
                                     compulsoryAssignments.filter(item => item.columnName === col.name)[0] ?
-                                        <> {compulsoryAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=>handleUnassign(index, 'compulsory')}> X </span></>
-                                        : <>{optionnalAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=>handleUnassign(index, 'optional')}> X </span></>
+                                        <> {compulsoryAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=> !actualAssignment && handleUnassign(index, 'compulsory')}> X </span></>
+                                        : <>{optionnalAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=> !actualAssignment && handleUnassign(index, 'optional')}> X </span></>
                                     : col.name}
                             </th>;
                         })}
@@ -108,14 +122,14 @@ const RenderTable: React.FC<Props> = ({
                     <tbody>
                     {aviExp.rows.map((row, index) => {
                         return (
-                            <tr key={index}>
-                                <th>{index}</th>
+                            <tr key={index} className={(index+1) < startingRow ? 'not-good-data' : ''}>
+                                <th>{index +1}</th>
                                 {row.map((cell: any, index: number) => {
                                     const isAssigned = compulsoryAssignments.map(item => item.columnIndex).includes(index) || optionnalAssignments.map(item => item.columnIndex).includes(index);
                                     return <td key={index} onMouseEnter={() => {
                                         handleHover(index)
                                     }} onMouseLeave={() => setIndexHover(null)}
-                                               onClick={()=> handleAssign(index)}
+                                               onClick={()=> !isAssigned && handleAssign(index)}
                                                className={isAssigned ? 'assigned' : indexHover === index && isAssigning ? 'hover' : ''}>{cell}</td>;
                                 })}
                             </tr>

@@ -72,6 +72,7 @@ const UploadExcel: React.FC<Props> = ({files, setFiles, aviExp, setAviExp, curre
                       isDragAccept,
                       isDragReject
                   }) => {
+                    const fileAccepted = files[0]? true : false
                     return (
                         <StyledUpload
                             {...getRootProps({
@@ -79,13 +80,26 @@ const UploadExcel: React.FC<Props> = ({files, setFiles, aviExp, setAviExp, curre
                                 isDragAccept,
                                 isDragReject
                             })}
+                            fileAccepted={files[0]? true : false}
                         >
                             <input {...getInputProps()} />
-                            <span>{isDragActive ? "📂" : "📁"}</span>
-                            <p>
-                                Drag 'n' drop your AviExp file here, or click to select a file
-                            </p>
-                            <em>(Only *.csv, *.xls and *.xlsx will be accepted)</em>
+                            <span>{isDragActive ? "📂" : fileAccepted ? "📄" : "📁"}</span>
+                            {fileAccepted ?
+                                <>
+                                    <p className={'success'}>
+                                        Your file {files[0].name} upload was successful.
+                                    </p>
+                                    <em className={'success'}>You can now import it.</em>
+                                </>
+                                :
+                                <>
+                                    <p>
+                                        Drag 'n' drop your AviExp file here, or click to select a file
+                                    </p>
+                                    <em>(Only *.csv, *.xls and *.xlsx will be accepted)</em>
+                                </>
+                            }
+
                         </StyledUpload>
                     );
                 }}

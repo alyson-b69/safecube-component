@@ -12,10 +12,14 @@ interface Props {
 const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
     const [compulsoryAssignments, setCompulsoryAssignments] = React.useState([{
         id: 1,
-        name: 'Shipments n°',
+        name: 'Container n°',
         columnName: null,
         columnIndex: null
-    }, {id: 2, name: 'Container n°', columnName: null, columnIndex: null}, {
+    }, {id: 2,
+        name: 'Shipment n°',
+        columnName: null,
+        columnIndex: null
+    }, {
         id: 3,
         name: 'End customers',
         columnName: null,
@@ -53,7 +57,8 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
         columnName: null,
         columnIndex: null
     }]);
-    const [actualOptionnalAssignment, setActualOptionnalAssignment] = React.useState<number|null>(null)
+    const [actualOptionnalAssignment, setActualOptionnalAssignment] = React.useState<number|null>(null);
+    const [startingRow, setStartingRow] = React.useState<number>(0)
 
     return (
         <AssignContainer>
@@ -68,7 +73,7 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                     {compulsoryAssignments.map((colToAssign, index) => {
                         const isAssigned = colToAssign.columnName ? true : false;
                         const isSelected = actualCompulsoryAssignment === index;
-                        return <Bloc key={index} disabled={false} status={isSelected ? 'selected' : isAssigned ? 'assigned' : ''}>
+                        return <Bloc key={index} disabled={false} status={isSelected ? 'selected' : isAssigned ? 'assigned' : ''} onClick={()=>{!isSelected && !isAssigned && setActualCompulsoryAssignment(index)}}>
                             <h4>{colToAssign.name}</h4> <p
                             className={isAssigned ? '' : 'not-assigned'}>{isAssigned ? `Column ${colToAssign.columnName}` : 'No column specified '}</p>
                         </Bloc>
@@ -113,6 +118,8 @@ const AssignColumnsName: React.FC<Props> = ({aviExp}) => {
                          setOptionnalAssignments={setOptionnalAssignments}
                          actualOptionnalAssignment={actualOptionnalAssignment}
                          setActualOptionnalAssignment={setActualOptionnalAssignment}
+                         startingRow={startingRow}
+                         setStartingRow={setStartingRow}
             />
 
             <StyledButton disabled={!compulsoryAssignments.every(col => col.columnIndex !== null)}>Upload AviExp</StyledButton>

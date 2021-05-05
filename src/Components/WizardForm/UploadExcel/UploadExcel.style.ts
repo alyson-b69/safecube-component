@@ -10,6 +10,9 @@ const getColor = (props: any) => {
     if (props.isDragActive) {
         return "#2196f3";
     }
+    if(props.fileAccepted) {
+        return "#7EB279";
+    }
     return "#eeeeee";
 };
 
@@ -48,17 +51,20 @@ export const FileContent = styled.div`
   }
 `
 
-export const StyledUpload = styled.div`
+export const StyledUpload = styled.div<{fileAccepted: boolean}>`
   max-width: 90%;
   margin: 10px;
   text-align: center !important;
   padding: 20px;
   border: 3px dashed ${(props) => getColor(props)};
-  background-color: #fafafa;
+  background-color: ${props => props.fileAccepted ? '#7EB27920' : '#fafafa'};
   color: #bdbdbd;
   cursor: pointer;
   & span {
     font-size: 2.5em;
+  }
+  & p.success, em.success{
+    color: #3D3D3B;
   }
 `;
 
