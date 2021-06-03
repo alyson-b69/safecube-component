@@ -4,12 +4,13 @@ import { FileContent, StyledUpload } from "./UploadExcel.style";
 //@ts-ignore
 import { ExcelRenderer } from "react-excel-renderer";
 import {StyledButton} from '../WizardForm.style'
+import { ExcelTable } from "../WizardForm";
 
 export interface Props{
-   files: any;
-   setFiles: any;
-   aviExp: any;
-   setAviExp: any;
+   files: File[];
+   setFiles: Dispatch<SetStateAction<File[]>>;
+   aviExp: ExcelTable;
+   setAviExp: Dispatch<SetStateAction<ExcelTable>>;
    currentStep: number;
    setCurrentStep: Dispatch<SetStateAction<number>>;
 }
@@ -17,7 +18,7 @@ export interface Props{
 const UploadExcel: React.FC<Props> = ({files, setFiles, aviExp, setAviExp, currentStep, setCurrentStep}) => {
 
     React.useEffect(() => {
-        files.map((file: any) => {
+        files.map((file: File) => {
             //@ts-ignore
             ExcelRenderer(file, (err, resp:ExcelTable) => {
                 if (err) {

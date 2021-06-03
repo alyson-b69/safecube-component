@@ -16,7 +16,7 @@ export interface ExcelTable {
 }
 
 const WizardForm = () => {
-    const [files, setFiles] = React.useState([]);
+    const [files, setFiles] = React.useState<File[]>([]);
     const [aviExp, setAviExp] = React.useState<ExcelTable>({cols: [], rows: []});
     const [cols, setCols] = React.useState([]);
     const [steps, setSteps] = React.useState([{id: 1, name: 'import aviExp'}, {id: 2, name: 'assign columns'}, {
@@ -31,7 +31,7 @@ const WizardForm = () => {
                 return <UploadExcel files={files} setFiles={setFiles} aviExp={aviExp} setAviExp={setAviExp}
                                     setCurrentStep={setCurrentStep} currentStep={currentStep}/>;
             case 2:
-                return <AssignColumnsName aviExp={aviExp}/>;
+                return <AssignColumnsName aviExp={aviExp} files={files}/>;
             case 2.1 :
                 return <div>2.1</div>
             default:

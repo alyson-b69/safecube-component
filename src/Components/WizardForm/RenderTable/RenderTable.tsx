@@ -1,15 +1,16 @@
 import StyledExcel from "./RenderTable.style";
 import React, {Dispatch, SetStateAction} from "react";
 import {ExcelTable} from "../WizardForm";
+import { Assignments } from "../AssignColumnsName/AssignColumnsName";
 
 interface Props {
     aviExp: ExcelTable;
-    compulsoryAssignments: any[];
-    setCompulsoryAssignments: Dispatch<SetStateAction<any>>;
+    compulsoryAssignments: Assignments[];
+    setCompulsoryAssignments: Dispatch<SetStateAction<Assignments[]>>;
     actualAssignment: number | null;
     setActualAssigment: Dispatch<SetStateAction<number|null>>;
-    optionnalAssignments: any[];
-    setOptionnalAssignments: Dispatch<SetStateAction<any>>;
+    optionnalAssignments: Assignments[];
+    setOptionnalAssignments: Dispatch<SetStateAction<Assignments[]>>;
     actualOptionnalAssignment: number | null;
     setActualOptionnalAssignment: Dispatch<SetStateAction<number | null>>;
     startingRow: number;
@@ -109,8 +110,8 @@ const RenderTable: React.FC<Props> = ({
                                        className={isAssigned ? 'assigned' : index === indexHover && isAssigning ? 'hover' : ''}>
                                 {isAssigned ?
                                     compulsoryAssignments.filter(item => item.columnName === col.name)[0] ?
-                                        <> {compulsoryAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=> !actualAssignment && handleUnassign(index, 'compulsory')}> X </span></>
-                                        : <>{optionnalAssignments.filter(item => item.columnName === col.name)[0].name} <span onClick={()=> !actualAssignment && handleUnassign(index, 'optional')}> X </span></>
+                                        <> {compulsoryAssignments.filter(item => item.columnName === col.name)[0].label} <span onClick={()=> !actualAssignment && handleUnassign(index, 'compulsory')}> X </span></>
+                                        : <>{optionnalAssignments.filter(item => item.columnName === col.name)[0].label} <span onClick={()=> !actualAssignment && handleUnassign(index, 'optional')}> X </span></>
                                     : col.name}
                             </th>;
                         })}

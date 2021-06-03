@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AssignContainer = styled.div`
+export const AssignContainer = styled.form`
   display:flex;
   flex-direction: column;
 `
